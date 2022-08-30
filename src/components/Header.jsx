@@ -12,6 +12,7 @@ const Header = () => {
                 <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#secrets">Secrets</a></li>
                 <li><a href="#quiz">Would you like to know your fate?</a></li>
+                <li><a href="#berries">Berries</a></li>
             </ul>
         </nav>
     </header>
