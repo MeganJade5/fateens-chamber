@@ -13,6 +13,11 @@ import BerriesHook from "./BerriesHook";
 import ContactHook from "./ContactHook";
 import Container from "@mui/material/Container";
 import NavBar from "./NavBar";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import NotFound from "./NotFound";
+import ThankYouPage from "./ThankYouPage";
+import JustBerry from "./JustBerry";
 
 const sections = [
   {
@@ -44,7 +49,13 @@ function LoadingPage() {
 function MainPage() {
   return (
     <div className="App">
-      {/* <SimpleHome/> */}
+      {/* <nav>
+        <Link to="/">Home</Link>| <Link to="/about">About</Link>|{" "}
+        <Link to="/location">Location</Link>| <Link to="/reviews">Reviews</Link>
+        | <Link to="/secrets">Secrets</Link>| <Link to="/quiz">Quiz</Link>|{" "}
+        <Link to="/berries">Berries</Link>| <Link to="/contact">Contact</Link>
+      </nav> */}
+
       <Container maxWidth="lg">
         <NavBar
           title="Fateen's Fortune-Telling Chamber"
@@ -52,16 +63,21 @@ function MainPage() {
         ></NavBar>
       </Container>
 
-      <Header />
-      <About />
-      <Location />
-      <Reviews />
-      <Secrets />
-      <Quiz />
-      {/* <Berries /> */}
-      <BerriesHook />
-      {/* <Contact /> */}
-      <ContactHook />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Header />} />
+        <Route path="about" element={<About />} />
+        <Route path="location" element={<Location />} />
+        <Route path="reviews" element={<Reviews />} />
+        <Route path="secrets" element={<Secrets />} />
+        <Route path="quiz" element={<Quiz />} />
+        <Route path="berries" element={<BerriesHook />} />
+        <Route path="contact" element={<ContactHook />} />
+        <Route path="thanks" element={<ThankYouPage />} />
+        <Route path="berries/:name" element={<JustBerry/>} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+
       <Footer
         title={"Visit again."}
         description={

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const initialBerries = [
   "starf",
@@ -56,11 +57,11 @@ const BerriesHook = () => {
   }
 
   function getFilteredBerries() {
-    if(!data.userInput) {
-        return data.berries;
+    if (!data.userInput) {
+      return data.berries;
     }
     let filteredBerries = data.berries.filter((berry) => {
-        return berry.includes(data.userInput);
+      return berry.includes(data.userInput);
     });
     return filteredBerries;
   }
@@ -86,7 +87,11 @@ const BerriesHook = () => {
       <input type="text" onChange={handleOnChange}></input>
       <ul>
         {getFilteredBerries().map((berry, index) => {
-          return <li key={index}>{berry}</li>;
+          return (
+            <li key={index}>
+              <Link to={berry}>{berry}</Link>
+            </li>
+          );
         })}
       </ul>
 

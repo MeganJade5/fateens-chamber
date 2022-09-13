@@ -4,8 +4,11 @@ import React, { useReducer } from "react";
 import reducer from "./utils/ContactReducer";
 import MessageCard from "./MessageCard";
 import ColourChoicePanel from "./ColourChoicePanel";
+import { useNavigate } from "react-router-dom";
 
 function ContactHook() {
+  let navigate = useNavigate();
+
   //const [contactFormData, setContactFormData] = useState(initialContactFormData);
 
   const initialState = {
@@ -61,7 +64,7 @@ function ContactHook() {
     } else if (message.toLowerCase().split(" ").join("").includes("moist")) {
       setUserMessage("Please refrain from such language.");
     } else {
-      setUserMessage("All is okay!");
+      navigate("/thanks");
     }
   }
 
@@ -69,7 +72,6 @@ function ContactHook() {
     <section id="contact">
       <div>
         <h2>Contact</h2>
-        <a href="#top">Top</a>
       </div>
       <h3>Contact me!</h3>
 
@@ -100,12 +102,7 @@ function ContactHook() {
             value={email}
             onChange={handleOnChange}
           ></input>
-          <button onClick={handleSubmit}>Submit</button>
         </form>
-
-        <p style={{ color: "blue" }}>
-          <b>{userMessage}</b>
-        </p>
       </div>
 
       <div>
@@ -124,6 +121,11 @@ function ContactHook() {
           setCardColour={setCardColour}
         />
       </div>
+
+      <p style={{ color: "blue" }}>
+        <b>{userMessage}</b>
+      </p>
+      <button onClick={handleSubmit}>Submit</button>
     </section>
   );
 }

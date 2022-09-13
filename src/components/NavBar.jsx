@@ -1,7 +1,8 @@
 import * as React from "react";
 import Toolbar from "@mui/material/Toolbar";
 import { Typography } from "@mui/material";
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
+import { Link } from "react-router-dom";
 function NavBar(props) {
   const { title, sections } = props;
   return (
@@ -15,26 +16,29 @@ function NavBar(props) {
           noWrap
           sx={{ flex: 1 }}
         >
-          {title}
+          <Link to="/">{title}</Link>
         </Typography>
       </Toolbar>
 
       <Toolbar
-      component="nav"
-      variant="dense"
-      sx={{justifyContent: 'space-between', overflowX:'auto'}}>
-        
+        component="nav"
+        variant="dense"
+        sx={{ justifyContent: "space-between", overflowX: "auto" }}
+      >
         {sections.map((section) => (
-            <Link 
-            href={section.url}
-            color="inherit"
-            noWrap
-            key={section.title}
-            variant="body2"
-            sx={{ p: 1, flexShrink: 0 }}
-            >
-                {section.title}
-            </Link>
+          <Link key={section.url} to={section.url}>
+            {section.title}
+          </Link>
+          // <Link
+          // href={section.url}
+          // color="inherit"
+          // noWrap
+          // key={section.title}
+          // variant="body2"
+          // sx={{ p: 1, flexShrink: 0 }}
+          // >
+          //     {section.title}
+          // </Link>
         ))}
       </Toolbar>
     </React.Fragment>
