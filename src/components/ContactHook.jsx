@@ -2,10 +2,8 @@
 
 import React, { useReducer } from "react";
 import reducer from "./utils/ContactReducer";
-
-// function ContactHooks() {
-
-// }
+import MessageCard from "./MessageCard";
+import ColourChoicePanel from "./ColourChoicePanel";
 
 function ContactHook() {
   //const [contactFormData, setContactFormData] = useState(initialContactFormData);
@@ -14,32 +12,40 @@ function ContactHook() {
     name: "",
     message: "",
     email: "",
-    userMessage: ""
-  }
+    userMessage: "",
+    textColour: "#f0f8ff",
+    cardColour: "#000000",
+  };
 
   const [store, dispatch] = useReducer(reducer, initialState);
-  const {name, message, email, userMessage} = store;
+  const { name, message, email, userMessage, textColour, cardColour } = store;
 
-  // function handleOnChange(event) {
-  //   setContactFormData({
-  //     ...contactFormData, // destructuring to get form data
-  //     // square brackets means that it's a key we're setting state with
-  //     [event.target.name]: event.target.value
-  //   })
-  // }
-  
   function handleOnChange(event) {
     dispatch({
       type: "setFormData",
-      data: event.target
-    })
+      data: event.target,
+    });
   }
 
-  function setUserMessage(userMessage){
+  function setUserMessage(userMessage) {
     dispatch({
-      type: 'setUserMessage',
-      data: userMessage
-    })
+      type: "setUserMessage",
+      data: userMessage,
+    });
+  }
+
+  function setTextColour(colour) {
+    dispatch({
+      type: "setTextColour",
+      data: colour,
+    });
+  }
+
+  function setCardColour(colour) {
+    dispatch({
+      type: "setCardColour",
+      data: colour,
+    });
   }
 
   function handleSubmit(event) {
@@ -52,9 +58,7 @@ function ContactHook() {
       setUserMessage("Email must be provided.");
     } else if (!isNaN(parseInt(message))) {
       setUserMessage("Message must not be a number.");
-    } else if (
-      message.toLowerCase().split(" ").join("").includes("moist")
-    ) {
+    } else if (message.toLowerCase().split(" ").join("").includes("moist")) {
       setUserMessage("Please refrain from such language.");
     } else {
       setUserMessage("All is okay!");
@@ -106,9 +110,19 @@ function ContactHook() {
 
       <div>
         <h4>This is what you have entered:</h4>
-        <p>Name: {name}</p>
-        <p>Message: {message}</p>
-        <p>Email: {email}</p>
+        <MessageCard
+          name={name}
+          message={message}
+          email={email}
+          textColour={textColour}
+          cardColour={cardColour}
+        />
+        <ColourChoicePanel
+          textColour={textColour}
+          cardColour={cardColour}
+          setTextColour={setTextColour}
+          setCardColour={setCardColour}
+        />
       </div>
     </section>
   );
